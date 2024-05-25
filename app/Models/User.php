@@ -12,59 +12,45 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
         'status',
-        'profile_image',
-        
+        'profile_image',  // ใช้ 'profile_image' ตามฐานข้อมูล
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public function generate()
-{
-    return $this->hasMany(Generate::class);
-}
-public function comment()
-{
-    return $this->hasMany(Comment::class);
-}
-public function chat()
-{
-    return $this->hasMany(Chat::class);
-}
-public function order()
-{
-    return $this->hasMany(Order::class, 'idorder');
-}
-public function genenratelist()
-{
-    return $this->hasMany(Genenratelist::class);
-}
+    {
+        return $this->hasMany(Generate::class);
+    }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'users_id');  // ใช้ 'users_id' ตามฐานข้อมูล
+    }
 
+    public function chats()
+    {
+        return $this->hasMany(Chat::class, 'users_id');  // ใช้ 'users_id' ตามฐานข้อมูล
+    }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'users_id');  // ใช้ 'users_id' ตามฐานข้อมูล
+    }
+
+    public function generateLists()
+    {
+        return $this->hasMany(GenerateList::class);
+    }
 }

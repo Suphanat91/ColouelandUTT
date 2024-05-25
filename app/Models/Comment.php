@@ -8,16 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $table = 'comment';
+
+    protected $table = 'comment';  // ใช้ชื่อให้ตรงกับฐานข้อมูล
     protected $primaryKey = 'idcomment';
 
-    public function folwer()
-    {
-        return $this->belongsTo(Folwer::class, 'folwer_idfolwer');
-    }
-    
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'users_id');  // ใช้ 'users_id' ตามฐานข้อมูล
     }
 }
