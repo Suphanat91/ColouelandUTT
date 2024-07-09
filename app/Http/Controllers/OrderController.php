@@ -20,7 +20,9 @@ class OrderController extends Controller
         //  dd($data);
         // $data = order::with('orderlist', 'user')->get();
         // dd($data);
-        return view ('Order',compact('data'));
+        return view ('order',compact('data'));
+        $data = Order::orderBy('idorder', 'desc')->get();
+        return view('order', compact('data'));
     }
 
     /**

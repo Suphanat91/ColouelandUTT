@@ -34,7 +34,7 @@
                     {{-- <td>{{$d->user->name}}</td> --}}
                     <td>{{$d->generatelist->user->name}}</td>
                     <td>{{ $d->generatelist->orderlist ? $d->generatelist->orderlist->folwer->name_fol : 'ไม่มีข้อมูล' }}</td>
-                    <td style="text-align: center";><img src="{{$d->imagework}}" alt="" style="max-width: 250px; max-height: 250px; "></td>
+                    <td style="text-align: center";><img src="https://colourlanduttaraditapi.com/api/readimage/{{$d->imagework}}" alt="" style="max-width: 250px; max-height: 250px; "></td>
                     {{-- <td>{{ $d->user ? $d->user->name : 'ไม่มีข้อมูล' }}</td> --}}
                    
 

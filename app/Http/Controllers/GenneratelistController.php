@@ -26,7 +26,7 @@ class GenneratelistController extends Controller
     // $orderItems = Orderlist::where('status', 2)->get();
     // $orderItems = Orderlist::whereIn('status2', ['2', '5'])->get(); // ตรวจสอบว่าค่าใน ENUM เป็น string หรือไม่
     $orderItems = Orderlist::whereHas('order', function ($query) {
-        $query->where('status4', '1');;
+        $query->where('status4', '2');;
     })
     ->where('status2', '2')
     ->get();
@@ -121,12 +121,18 @@ return view('generatelist', ['orderItems' => $orderItems]);
         //
     }
     public function addform($id)
-    {
-         $generatelist = Generatelist::all();
-          $data1 =   Generate::with('folwer', 'user')->get();
+    {  
+        $generatelist = Generatelist::all();
+        // ดึงข้อมูล Generate ล่าสุดสำหรับแต่ละ user_id และ idfolwer โดยจัดเรียงตาม idgenerate แทน created_at
+        $data1 = Generate::with('folwer', 'user')
+            ->orderBy('idgenerate', 'desc')
+            ->get()
+            ->unique(function ($item) {
+                return $item['user_id'].'-'.$item['idfolwer'];
+            });
+        
         $data = Orderlist::find($id);
-        $users = User::where('status', 'user')->get(); // Fetch users with status 'user'
-
+        $users = User::where('status', 'farmer')->get(); // Fetch users with status 'user'
 
         return view('generatelist1',compact('data','generatelist','data1','users'));
     }

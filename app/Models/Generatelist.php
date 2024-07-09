@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Generatelist extends Model
 {
     use HasFactory;
+     public $timestamps = false; // ปิดการใช้งาน timestamps
     protected $table = 'generate_list';
     protected $primaryKey = 'idgenerate_list';
     public function user(){
